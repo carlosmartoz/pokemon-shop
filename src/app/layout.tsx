@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 // Metadata
 export const metadata: Metadata = {
   title: "Pokémon Shop",
-  description: "Pokémon Shop",
+  description: "Pokémon Shop technical test.",
 };
 
 // Layout
@@ -17,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className="min-h-svh scroll-smooth">
+      <body className="min-h-svh bg-slate-900">{children}</body>
     </html>
   );
 }
