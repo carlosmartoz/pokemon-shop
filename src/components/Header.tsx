@@ -1,37 +1,23 @@
 // Client Component
 "use client";
 
-// React
-import { useEffect, useState } from "react";
-
 // Types
-import { Wallet } from "@/types/types";
-
-// React Icons
-import { FaSearch } from "react-icons/fa";
+import { type Wallet } from "@/types/types";
 
 // Hooks
 import { useSearch } from "@/hooks/useSearch";
+import { useWallet } from "@/hooks/useWallet";
 
 // React icons
-import { FaWallet, FaShoppingCart } from "react-icons/fa";
+import { FaWallet, FaShoppingCart, FaSearch } from "react-icons/fa";
 
 // Component
 export default function Header() {
+  // Wallet
+  const [wallet, setWallet] = useWallet();
+
   // Search
   const [inputRef, handleSearch] = useSearch();
-
-  // Wallet
-  const [wallet, setWallet] = useState<Wallet>({ currency: "MX$", balance: 0 });
-
-  // Effect
-  useEffect(() => {
-    // Set wallet
-    setWallet({
-      currency: "MX$",
-      balance: Math.floor(Math.random() * 5000) + 1000,
-    });
-  }, []);
 
   // Return
   return (
@@ -69,10 +55,12 @@ export default function Header() {
 
               <button
                 onClick={() =>
-                  setWallet((prev) => ({
-                    ...prev,
-                    balance: prev.balance + 1000,
-                  }))
+                  setWallet((prev: Wallet) => {
+                    return {
+                      ...prev,
+                      balance: prev.balance + 1000,
+                    };
+                  })
                 }
                 className="border-b border-white font-sans text-sm font-normal text-black transition-all duration-300 ease-in-out hover:border-black"
               >

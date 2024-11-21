@@ -4,6 +4,10 @@ import { useState, useEffect } from "react";
 // Types
 import { PokemonWithPriceAndNumber } from "@/types/types";
 
+// Stores
+import { useErrorStore } from "@/stores/useErrorStore";
+import { useLoadingStore } from "@/stores/useLoadingStore";
+
 // Services
 import { fetchPokemonList } from "@/services/fetchPokemonList";
 
@@ -23,8 +27,14 @@ export const useLoadPokemon = (): [
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Error store
+  const { setError } = useErrorStore();
+
   // Offset
   const [offset, setOffset] = useState(0);
+
+  // Loading store
+  const { setLoading } = useLoadingStore();
 
   // Pokemon list
   const [pokemonList, setPokemonList] = useState<PokemonWithPriceAndNumber[]>(
@@ -33,17 +43,33 @@ export const useLoadPokemon = (): [
 
   // Function to load pokémon list
   const loadPokemonList = async () => {
-    // Fetch pokémon list
-    const pokemonList = await fetchPokemonList(offset);
+    // Set loading
+    setLoading(true);
 
-    // Assing prices and currencies to the pokemon list
-    const pokemonListWithPriceAndCurrency = assingNewDataToPokemon(pokemonList);
+    // Try to fetch pokémon list
+    try {
+      // Fetch pokémon list
+      const pokemonList = await fetchPokemonList(offset);
 
-    // Set pokémon list
-    setPokemonList((prev) => [...prev, ...pokemonListWithPriceAndCurrency]);
+      // Assing prices and currencies to the pokemon list
+      const pokemonListWithPriceAndCurrency =
+        assingNewDataToPokemon(pokemonList);
 
-    // Set offset
-    setOffset((prev) => prev + 20);
+      // Set pokémon list
+      setPokemonList((prev) => [...prev, ...pokemonListWithPriceAndCurrency]);
+
+      // Set offset
+      setOffset((prev) => prev + 20);
+    } catch (error) {
+      // Set loading
+      setLoading(false);
+
+      // Set Error
+      setError("Failed to fetch Pokémon list");
+    } finally {
+      // Set loading
+      setLoading(false);
+    }
   };
 
   // Return

@@ -10,6 +10,18 @@ export interface Search {
   setSearch: (search: string) => void;
 }
 
+// Loading
+export interface Loading {
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
+}
+
+// Error
+export interface Error {
+  error: string;
+  setError: (error: string) => void;
+}
+
 // Pokemon
 export interface Pokemon {
   id: number;
