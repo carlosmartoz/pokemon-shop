@@ -47,7 +47,7 @@ export default function Card({
               {types.map((type) => (
                 <li
                   key={type.slot}
-                  className={`rounded px-4 py-1 font-sans text-base font-normal capitalize ${getClassColorType(type.type.name)}`}
+                  className={`rounded px-4 py-0.5 font-sans text-base font-normal capitalize ${getClassColorType(type.type.name)}`}
                 >
                   {type.type.name}
                 </li>
