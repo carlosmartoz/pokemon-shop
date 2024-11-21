@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="min-h-svh scroll-smooth">
-      <body className="min-h-svh bg-slate-900">{children}</body>
+      <body className="min-h-svh bg-body">{children}</body>
     </html>
   );
 }
