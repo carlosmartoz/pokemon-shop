@@ -10,7 +10,7 @@ import { useLoadPokemon } from "@/hooks/useLoadPokemon";
 // Component
 export default function List() {
   // Load Pokémon
-  const [pokemonList] = useLoadPokemon();
+  const [pokemonList, loadPokemonList] = useLoadPokemon();
 
   // Return
   return (
@@ -20,6 +20,14 @@ export default function List() {
           <Card key={pokemon.id} {...pokemon} />
         ))}
       </ul>
+
+      <button
+        type="button"
+        onClick={loadPokemonList}
+        className="bg-button-secondary hover:bg-button-secondary-hover mt-12 rounded-md px-4 py-2 font-sans text-base font-normal text-white transition-all duration-300 ease-in-out"
+      >
+        Load more Pokémon
+      </button>
     </>
   );
 }

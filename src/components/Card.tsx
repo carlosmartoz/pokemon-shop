@@ -25,12 +25,14 @@ export default function Card({
         <section>
           <figure className="bg-neutral rounded-lg">
             <Image
+              priority
+              width={0}
+              height={0}
               alt={name}
               src={image}
-              width={100}
-              height={100}
               title={name}
-              layout="responsive"
+              sizes="100vw"
+              style={{ width: "100%", height: "auto" }}
             />
           </figure>
 

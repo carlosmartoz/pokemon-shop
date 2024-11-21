@@ -11,7 +11,10 @@ import { fetchPokemonList } from "@/services/fetchPokemonList";
 import { assignPricesAndCurrencies } from "@/utils/assignPricesAndCurrencies";
 
 // Hook
-export const useLoadPokemon = (): [PokemonWithPriceAndCurrency[]] => {
+export const useLoadPokemon = (): [
+  PokemonWithPriceAndCurrency[],
+  () => Promise<void>,
+] => {
   // Use Effect
   useEffect(() => {
     // Load pokémon list
@@ -45,5 +48,5 @@ export const useLoadPokemon = (): [PokemonWithPriceAndCurrency[]] => {
   };
 
   // Return
-  return [pokemonList];
+  return [pokemonList, loadPokemonList];
 };

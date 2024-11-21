@@ -19,7 +19,7 @@ export function getClassColorType(type: string): string {
     case "poison":
       return "bg-poison text-white";
     case "ground":
-      return "bg-ground text-black";
+      return "bg-ground text-white";
     case "flying":
       return "bg-flying text-black";
     case "psychic":
@@ -33,11 +33,11 @@ export function getClassColorType(type: string): string {
     case "dark":
       return "bg-dark text-white";
     case "dragon":
-      return "bg-dragon text-black";
+      return "bg-dragon text-white";
     case "steel":
       return "bg-steel text-white";
     case "fairy":
-      return "bg-fairy text-white";
+      return "bg-fairy text-black";
     default:
       return "bg-black text-white";
   }
