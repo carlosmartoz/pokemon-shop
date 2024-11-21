@@ -1,17 +1,25 @@
 // Components
-import List from "@/components/List";
+import Main from "@/components/Main";
+import Header from "@/components/Header";
 
 // Page
 export default function Home() {
   return (
     <>
-      <main className="flex min-h-svh flex-col items-center justify-center">
-        <article className="bg-neutral flex min-h-svh w-full max-w-6xl flex-col items-center justify-center p-6 lg:p-0">
-          <section className="flex h-full w-full max-w-5xl flex-col items-center justify-center rounded-lg bg-white p-6">
-            <List />
-          </section>
-        </article>
-      </main>
+      <div
+        id="#root"
+        className="flex min-h-svh w-full max-w-5xl flex-col items-center justify-center gap-12 bg-white p-6"
+      >
+        <Header />
+
+        <Main />
+
+        <footer className="flex w-full max-w-6xl flex-col items-center justify-center p-6 lg:p-0">
+          <p className="text-center text-base font-normal text-black">
+            Pokémon Shop.
+          </p>
+        </footer>
+      </div>
     </>
   );
 }

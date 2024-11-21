@@ -1,13 +1,11 @@
 // Next
 import Image from "next/image";
 
-// Types
-import { type PokemonWithPriceAndCurrency } from "@/types/types";
-
 // Utils
 import { getClassColorType } from "@/utils/getClassColorType";
-import { addZerosToDexNumber } from "@/utils/addZerosToDexNumber";
-import { addSymbolToPriceAndCurrency } from "@/utils/addSymbolToPriceAndCurrency";
+
+// Types
+import { type PokemonWithPriceAndNumber } from "@/types/types";
 
 // Component
 export default function Card({
@@ -15,15 +13,18 @@ export default function Card({
   name,
   image,
   types,
-  price,
-  currency,
-}: PokemonWithPriceAndCurrency) {
+  number,
+  priceAndCurrency,
+}: PokemonWithPriceAndNumber) {
   // Return
   return (
     <>
-      <li key={id}>
+      <li
+        key={id}
+        className="transition-all duration-300 ease-in-out hover:-translate-y-2"
+      >
         <section>
-          <figure className="bg-neutral rounded-lg">
+          <figure className="bg-neutral rounded">
             <Image
               priority
               width={0}
@@ -38,7 +39,7 @@ export default function Card({
 
           <div className="flex flex-col gap-2">
             <span className="text-gray font-mono text-base font-medium">
-              #{addZerosToDexNumber(id)}
+              {number}
             </span>
 
             <h2 className="font-sans text-xl font-semibold capitalize text-black">
@@ -57,12 +58,12 @@ export default function Card({
             </ul>
 
             <p className="font-sans text-base font-normal text-black">
-              {addSymbolToPriceAndCurrency(price, currency)}
+              {priceAndCurrency}
             </p>
 
             <button
               type="button"
-              className="bg-button hover:bg-button-hover w-full rounded-md p-2 font-sans text-base font-normal text-white transition-all duration-300 ease-in-out"
+              className="bg-button-blue hover:bg-button-blue-hover w-full rounded p-2 font-sans text-base font-normal text-white transition-all duration-300 ease-in-out"
             >
               Add to cart
             </button>

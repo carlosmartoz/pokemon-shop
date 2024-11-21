@@ -2,17 +2,17 @@
 import { useState, useEffect } from "react";
 
 // Types
-import { PokemonWithPriceAndCurrency } from "@/types/types";
+import { PokemonWithPriceAndNumber } from "@/types/types";
 
 // Services
 import { fetchPokemonList } from "@/services/fetchPokemonList";
 
 // Utils
-import { assignPricesAndCurrencies } from "@/utils/assignPricesAndCurrencies";
+import { assingNewDataToPokemon } from "@/utils/assingNewDataToPokemon";
 
 // Hook
 export const useLoadPokemon = (): [
-  PokemonWithPriceAndCurrency[],
+  PokemonWithPriceAndNumber[],
   () => Promise<void>,
 ] => {
   // Use Effect
@@ -27,7 +27,7 @@ export const useLoadPokemon = (): [
   const [offset, setOffset] = useState(0);
 
   // Pokemon list
-  const [pokemonList, setPokemonList] = useState<PokemonWithPriceAndCurrency[]>(
+  const [pokemonList, setPokemonList] = useState<PokemonWithPriceAndNumber[]>(
     [],
   );
 
@@ -37,8 +37,7 @@ export const useLoadPokemon = (): [
     const pokemonList = await fetchPokemonList(offset);
 
     // Assing prices and currencies to the pokemon list
-    const pokemonListWithPriceAndCurrency =
-      assignPricesAndCurrencies(pokemonList);
+    const pokemonListWithPriceAndCurrency = assingNewDataToPokemon(pokemonList);
 
     // Set pokémon list
     setPokemonList((prev) => [...prev, ...pokemonListWithPriceAndCurrency]);

@@ -1,7 +1,13 @@
 // Wallet
 export interface Wallet {
-  currency: string;
   balance: number;
+  currency: string;
+}
+
+// Search
+export interface Search {
+  search: string;
+  setSearch: (search: string) => void;
 }
 
 // Pokemon
@@ -13,7 +19,7 @@ export interface Pokemon {
 }
 
 // Pokemon with price and currency
-export interface PokemonWithPriceAndCurrency extends Pokemon {
-  price: string;
-  currency: string;
+export interface PokemonWithPriceAndNumber extends Pokemon {
+  number: string;
+  priceAndCurrency: string;
 }
