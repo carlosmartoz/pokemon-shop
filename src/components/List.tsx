@@ -75,8 +75,9 @@ export default function List() {
         filteredPokemonList.length > 20 && (
           <button
             type="button"
+            disabled={loading}
             onClick={loadPokemonList}
-            className="bg-button-green hover:bg-button-green-hover rounded-md px-4 py-2 font-sans text-base font-normal text-white transition-all duration-300 ease-in-out"
+            className="bg-button-green hover:bg-button-green-hover disabled:hover:bg-button-green rounded-md px-4 py-2 font-sans text-base font-normal text-white transition-all duration-300 ease-in-out disabled:opacity-70"
           >
             Load more Pokémon
           </button>
