@@ -90,7 +90,7 @@ export const useLoadPokemon = (): [
     const PokemonWithNewData = assingNewDataToPokemonList(pokemonList);
 
     // Get existing list from local storage
-    const existingList = localStorage.getItem("pokemonList");
+    const existingList = localStorage.getItem("pokemon-list-storage");
 
     // Parse existing list or initialize as empty array
     const parsedList = existingList ? JSON.parse(existingList) : [];
