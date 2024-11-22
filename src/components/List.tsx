@@ -59,7 +59,7 @@ export default function List() {
             type="button"
             disabled={loadingMore}
             onClick={loadMorePokemon}
-            className="bg-button-green hover:bg-button-green-hover disabled:hover:bg-button-green rounded-md px-4 py-2 font-sans text-base font-normal text-white transition-all duration-300 ease-in-out disabled:opacity-70"
+            className="bg-green hover:bg-green-hover disabled:hover:bg-green rounded-md px-4 py-2 font-sans text-base font-normal text-white transition-all duration-300 ease-in-out disabled:opacity-70"
           >
             {loadingMore ? "Loading..." : "Load more Pokémon"}
           </button>

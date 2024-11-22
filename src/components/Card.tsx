@@ -63,7 +63,7 @@ export default function Card({
 
             <button
               type="button"
-              className="bg-button-blue hover:bg-button-blue-hover w-full rounded p-2 font-sans text-base font-normal text-white transition-all duration-300 ease-in-out"
+              className="bg-blue hover:bg-blue-hover w-full rounded p-2 font-sans text-base font-normal text-white transition-all duration-300 ease-in-out"
             >
               Add to cart
             </button>

@@ -32,7 +32,7 @@ export default function Search() {
           type="submit"
           title="search button"
           aria-label="search button"
-          className="bg-button-orange hover:bg-button-orange-hover rounded px-3 py-2 text-2xl text-white transition-all duration-300 ease-in-out"
+          className="bg-orange hover:bg-orange-hover rounded px-3 py-2 text-2xl text-white transition-all duration-300 ease-in-out"
         >
           <FaSearch />
         </button>

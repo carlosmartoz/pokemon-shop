@@ -19,7 +19,7 @@ export default function Wallet() {
   return (
     <>
       <section className="flex flex-col">
-        <span className="text-button-green font-mono text-base font-semibold">
+        <span className="text-green font-mono text-base font-semibold">
           {loading ? "Loading..." : `${wallet.currency} ${wallet.balance}`}
         </span>
 
