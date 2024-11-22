@@ -2,17 +2,17 @@
 import { useState, useEffect } from "react";
 
 // Types
-import { PokemonWithPriceAndNumber } from "@/types/types";
+import { type PokemonWithNewData } from "@/types/pokemon";
 
 // Services
 import { fetchPokemonList } from "@/services/fetchPokemonList";
 
 // Utils
-import { assingNewDataToPokemon } from "@/utils/assingNewDataToPokemon";
+import { assingNewDataToPokemonList } from "@/utils/assingNewDataToPokemonList";
 
 // Hook
 export const useLoadPokemon = (): [
-  PokemonWithPriceAndNumber[],
+  PokemonWithNewData[],
   () => Promise<void>,
   boolean,
   boolean,
@@ -39,12 +39,10 @@ export const useLoadPokemon = (): [
   const [offset, setOffset] = useState(0);
 
   // Pokemon list
-  const [pokemonList, setPokemonList] = useState<PokemonWithPriceAndNumber[]>(
-    [],
-  );
+  const [pokemonList, setPokemonList] = useState<PokemonWithNewData[]>([]);
 
   // Function to load initial pokémon list
-  const loadPokemonList = async () => {
+  async function loadPokemonList() {
     // Set loading
     setLoading(true);
 
@@ -58,10 +56,10 @@ export const useLoadPokemon = (): [
       // Set loading
       setLoading(false);
     }
-  };
+  }
 
   // Function to load more pokémon
-  const loadMorePokemon = async () => {
+  async function loadMorePokemon() {
     // Set loading more
     setLoadingMore(true);
 
@@ -75,15 +73,15 @@ export const useLoadPokemon = (): [
       // Set loading more
       setLoadingMore(false);
     }
-  };
+  }
 
   // Function to fetch and update pokémon list
-  const fetchAndUpdatePokemonList = async () => {
+  async function fetchAndUpdatePokemonList() {
     // Fetch pokémon list
     const pokemonList = await fetchPokemonList(offset);
 
-    // Assing prices and currencies to the pokemon list
-    const pokemonWithPriceAndNumber = assingNewDataToPokemon(pokemonList);
+    // Assing new data to the pokemon list
+    const PokemonWithNewData = assingNewDataToPokemonList(pokemonList);
 
     // Get existing list from local storage
     const existingList = localStorage.getItem("pokemonList");
@@ -94,10 +92,10 @@ export const useLoadPokemon = (): [
     // Combine existing list with new data, filtering out duplicates
     const updatedList = [
       ...parsedList,
-      ...pokemonWithPriceAndNumber.filter(
+      ...PokemonWithNewData.filter(
         (newPokemon) =>
           !parsedList.some(
-            (existingPokemon: PokemonWithPriceAndNumber) =>
+            (existingPokemon: PokemonWithNewData) =>
               existingPokemon.number === newPokemon.number,
           ),
       ),
@@ -114,7 +112,7 @@ export const useLoadPokemon = (): [
 
     // Set offset
     setOffset((prev) => prev + 20);
-  };
+  }
 
   // Return
   return [pokemonList, loadMorePokemon, error, loading, loadingMore];

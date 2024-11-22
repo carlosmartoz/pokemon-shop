@@ -5,45 +5,43 @@
 import { FaWallet } from "react-icons/fa";
 
 // Types
-import { type Wallet } from "@/types/types";
+import { type Wallet } from "@/types/wallet";
 
 // Hooks
 import { useWallet } from "@/hooks/useWallet";
 
+// Stores
+import { useWalletStore } from "@/stores/useWalletStore";
+
+// Utils
+import { addSymbolToPriceAndCurrency } from "@/utils/addSymbolToPriceAndCurrency";
+
 // Component
 export default function Wallet() {
   // Wallet
-  const [wallet, setWallet, loading] = useWallet();
+  const [loading] = useWallet();
+
+  // Wallet store
+  const { wallet, addBalance } = useWalletStore();
 
   // Return
   return (
     <>
-      <section className="flex flex-col">
-        <span className="text-green font-mono text-base font-semibold">
-          {loading ? "Loading..." : `${wallet.currency} ${wallet.balance}`}
-        </span>
-
+      <section className="flex items-center gap-2">
         <button
-          disabled={loading}
-          onClick={() =>
-            setWallet((prev: Wallet) => {
-              return {
-                ...prev,
-                balance: prev.balance + 1000,
-              };
-            })
-          }
-          className="border-b border-white font-sans text-sm font-normal text-black transition-all duration-300 ease-in-out hover:border-black disabled:opacity-70 disabled:hover:border-white"
+          onClick={() => addBalance(1000)}
+          className="bg-blue hover:bg-blue-hover rounded px-3 py-1 font-sans text-base font-normal text-white transition-all duration-300 ease-in-out"
         >
           Add funds
         </button>
-      </section>
 
-      <section
-        aria-label="wallet"
-        className="rounded-full border border-black p-2"
-      >
-        <FaWallet className="text-2xl" />
+        <span className="bg-green flex items-center gap-2 rounded px-3 py-1 font-sans text-base font-normal text-white">
+          {loading
+            ? "Loading..."
+            : `${addSymbolToPriceAndCurrency(wallet.balance.toFixed(2), wallet.currency)}`}
+
+          <FaWallet />
+        </span>
       </section>
     </>
   );

@@ -1,6 +1,9 @@
 // Client Component
 "use client";
 
+// React icons
+import { CgPokemon } from "react-icons/cg";
+
 // Components
 import Card from "@/components/Card";
 import Error from "@/components/Error";
@@ -59,9 +62,13 @@ export default function List() {
             type="button"
             disabled={loadingMore}
             onClick={loadMorePokemon}
-            className="bg-green hover:bg-green-hover disabled:hover:bg-green rounded-md px-4 py-2 font-sans text-base font-normal text-white transition-all duration-300 ease-in-out disabled:opacity-70"
+            className="bg-green hover:bg-green-hover disabled:hover:bg-green flex w-48 justify-center rounded-md px-4 py-2 font-sans text-base font-normal text-white transition-all duration-300 ease-in-out disabled:opacity-70"
           >
-            {loadingMore ? "Loading..." : "Load more Pokémon"}
+            {loadingMore ? (
+              <CgPokemon className="animate-spin text-2xl text-white" />
+            ) : (
+              "Load more Pokémon"
+            )}
           </button>
         )}
     </>

@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 
 // Next Config
 const nextConfig: NextConfig = {
+  reactStrictMode: false,
   images: {
     domains: ["raw.githubusercontent.com"],
   },

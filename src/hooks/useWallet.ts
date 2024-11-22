@@ -1,54 +1,38 @@
-// Types
-import { type Wallet } from "@/types/types";
-
 // React
 import { useEffect, useState } from "react";
 
+// Stores
+import { useWalletStore } from "@/stores/useWalletStore";
+
 // Hooks
-export const useWallet = (): [
-  Wallet,
-  (wallet: Wallet | ((prev: Wallet) => Wallet)) => void,
-  boolean,
-] => {
+export const useWallet = (): [boolean] => {
+  // Wallet
+  const { addBalance } = useWalletStore();
+
   // Loading
   const [loading, setLoading] = useState<boolean>(true);
 
-  // Wallet
-  const [wallet, setWallet] = useState<Wallet>({ currency: "MX$", balance: 0 });
-
   // Effect
   useEffect(() => {
-    // Set loading
-    setLoading(true);
+    // Get wallet from local storage
+    const storedWallet = localStorage.getItem("wallet-storage");
 
-    // Get saved wallet
-    const savedWallet = localStorage.getItem("wallet");
+    // If wallet is not stored, add initial balance
+    if (!storedWallet) {
+      // Random initial balance
+      const initialBalance = Math.floor(Math.random() * 5000) + 1000;
 
-    // IF saved wallet
-    if (savedWallet) {
-      // Set wallet
-      setWallet(JSON.parse(savedWallet));
+      // Add balance
+      addBalance(initialBalance);
 
       // Set loading
       setLoading(false);
     } else {
-      // Set wallet
-      setWallet({
-        currency: "MX$",
-        balance: Math.floor(Math.random() * 5000) + 1000,
-      });
-
       // Set loading
       setLoading(false);
     }
-  }, []);
-
-  // Effect
-  useEffect(() => {
-    // Set wallet in local storage
-    localStorage.setItem("wallet", JSON.stringify(wallet));
-  }, [wallet]);
+  }, [addBalance]);
 
   // Return
-  return [wallet, setWallet, loading];
+  return [loading];
 };

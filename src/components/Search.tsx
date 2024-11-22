@@ -25,7 +25,7 @@ export default function Search() {
           autoComplete="off"
           placeholder="Name or Number"
           aria-label="search input by name or id"
-          className="rounded border border-black p-2 font-sans text-base font-normal text-black"
+          className="rounded border border-black p-2 font-sans text-base font-normal text-black placeholder:font-semibold"
         />
 
         <button

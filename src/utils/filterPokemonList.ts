@@ -1,11 +1,11 @@
 // Types
-import { type PokemonWithPriceAndNumber } from "@/types/types";
+import { type PokemonWithNewData } from "@/types/pokemon";
 
 // Function to filter the pokemon list
 export function filterPokemonList(
-  pokemonList: PokemonWithPriceAndNumber[],
+  pokemonList: PokemonWithNewData[],
   search: string,
-): PokemonWithPriceAndNumber[] {
+): PokemonWithNewData[] {
   // Return
   return pokemonList.filter(
     (pokemon) =>

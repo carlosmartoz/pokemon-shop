@@ -1,11 +1,19 @@
+// Client component
+"use client";
+
 // Next
 import Image from "next/image";
 
+// Types
+import { type PokemonWithNewData } from "@/types/pokemon";
+
+// Stores
+import { useCartStore } from "@/stores/useCartStore";
+import { usePokemonOwnedStore } from "@/stores/usePokemonOwnedStore";
+
 // Utils
 import { getClassColorType } from "@/utils/getClassColorType";
-
-// Types
-import { type PokemonWithPriceAndNumber } from "@/types/types";
+import { addSymbolToPriceAndCurrency } from "@/utils/addSymbolToPriceAndCurrency";
 
 // Component
 export default function Card({
@@ -13,15 +21,22 @@ export default function Card({
   name,
   image,
   types,
+  price,
   number,
-  priceAndCurrency,
-}: PokemonWithPriceAndNumber) {
+  currency,
+}: PokemonWithNewData) {
+  // Cart store
+  const { addToCart, cartList } = useCartStore();
+
+  // Pokemon owned store
+  const { pokemonOwnedList } = usePokemonOwnedStore();
+
   // Return
   return (
     <>
       <li
         key={id}
-        className="transition-all duration-300 ease-in-out hover:-translate-y-2"
+        className={`transition-all duration-300 ease-in-out ${cartList.some((item) => item.id === id) || pokemonOwnedList.some((item) => item === id) ? "opacity-70" : "hover:-translate-y-2"}`}
       >
         <section>
           <figure className="bg-neutral rounded">
@@ -38,7 +53,7 @@ export default function Card({
           </figure>
 
           <section className="flex flex-col gap-2">
-            <span className="text-gray font-mono text-base font-medium">
+            <span className="text-gray font-mono text-base font-normal">
               {number}
             </span>
 
@@ -57,13 +72,23 @@ export default function Card({
               ))}
             </ul>
 
-            <p className="font-sans text-base font-normal text-black">
-              {priceAndCurrency}
+            <p className="text-green font-sans text-base font-semibold">
+              {addSymbolToPriceAndCurrency(price, currency)}
             </p>
 
             <button
               type="button"
-              className="bg-blue hover:bg-blue-hover w-full rounded p-2 font-sans text-base font-normal text-white transition-all duration-300 ease-in-out"
+              disabled={cartList.some((item) => item.id === id)}
+              onClick={() =>
+                addToCart({
+                  id,
+                  name,
+                  price,
+                  currency,
+                  type: types[0].type.name,
+                })
+              }
+              className="bg-blue hover:bg-blue-hover disabled:hover:bg-blue w-full rounded p-2 font-sans text-base font-normal text-white transition-all duration-300 ease-in-out"
             >
               Add to cart
             </button>

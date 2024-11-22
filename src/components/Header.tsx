@@ -1,9 +1,7 @@
 // Components
+import Cart from "@/components/Cart";
 import Search from "@/components/Search";
 import Wallet from "@/components/Wallet";
-
-// React icons
-import { FaShoppingCart } from "react-icons/fa";
 
 // Component
 export default function Header() {
@@ -19,12 +17,7 @@ export default function Header() {
           </li>
 
           <li>
-            <button
-              type="button"
-              className="rounded-full border border-black p-2"
-            >
-              <FaShoppingCart className="text-2xl" />
-            </button>
+            <Cart />
           </li>
         </ul>
       </header>

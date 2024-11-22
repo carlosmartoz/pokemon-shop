@@ -2,7 +2,7 @@
 import axios from "axios";
 
 // Types
-import { type Pokemon } from "@/types/types";
+import { type Pokemon } from "@/types/pokemon";
 
 // Service
 export const fetchPokemonList = async (
@@ -44,6 +44,6 @@ export const fetchPokemonList = async (
     );
   } catch (error) {
     // Throw an error with a message if the request fails
-    throw new Error("Failed to fetch Pokemon list");
+    throw new Error("Failed to fetch Pokémon list");
   }
 };
