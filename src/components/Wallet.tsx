@@ -13,17 +13,18 @@ import { useWallet } from "@/hooks/useWallet";
 // Component
 export default function Wallet() {
   // Wallet
-  const [wallet, setWallet] = useWallet();
+  const [wallet, setWallet, loading] = useWallet();
 
   // Return
   return (
     <>
-      <div className="flex flex-col">
+      <section className="flex flex-col">
         <span className="text-button-green font-mono text-base font-semibold">
-          {wallet.currency} {wallet.balance}
+          {loading ? "Loading..." : `${wallet.currency} ${wallet.balance}`}
         </span>
 
         <button
+          disabled={loading}
           onClick={() =>
             setWallet((prev: Wallet) => {
               return {
@@ -32,15 +33,18 @@ export default function Wallet() {
               };
             })
           }
-          className="border-b border-white font-sans text-sm font-normal text-black transition-all duration-300 ease-in-out hover:border-black"
+          className="border-b border-white font-sans text-sm font-normal text-black transition-all duration-300 ease-in-out hover:border-black disabled:opacity-70 disabled:hover:border-white"
         >
           Add funds
         </button>
-      </div>
+      </section>
 
-      <div aria-label="wallet" className="rounded-full border border-black p-2">
+      <section
+        aria-label="wallet"
+        className="rounded-full border border-black p-2"
+      >
         <FaWallet className="text-2xl" />
-      </div>
+      </section>
     </>
   );
 }

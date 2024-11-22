@@ -3,32 +3,27 @@
 
 // Components
 import Card from "@/components/Card";
+import Error from "@/components/Error";
 import Loader from "@/components/Loader";
+import NotFound from "@/components/NotFound";
 
 // Hooks
 import { useLoadPokemon } from "@/hooks/useLoadPokemon";
 
 // Stores
-import { useErrorStore } from "@/stores/useErrorStore";
 import { useSearchStore } from "@/stores/useSearchStore";
-import { useLoadingStore } from "@/stores/useLoadingStore";
 
 // Utils
 import { filterPokemonList } from "@/utils/filterPokemonList";
 
 // Component
 export default function List() {
-  // Error store
-  const { error } = useErrorStore();
-
   // Search store
   const { search } = useSearchStore();
 
-  // Loading store
-  const { loading } = useLoadingStore();
-
   // Load Pokémon
-  const [pokemonList, loadPokemonList] = useLoadPokemon();
+  const [pokemonList, loadMorePokemon, error, loading, loadingMore] =
+    useLoadPokemon();
 
   // Filtered Pokémon List
   const filteredPokemonList = filterPokemonList(pokemonList, search);
@@ -36,6 +31,7 @@ export default function List() {
   // Return
   return (
     <>
+      {/* Show list if the lenght is more than 0 */}
       {filteredPokemonList.length > 0 && (
         <ul className="grid w-full flex-1 grid-cols-1 gap-x-4 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {filteredPokemonList.map((pokemon) => (
@@ -44,42 +40,28 @@ export default function List() {
         </ul>
       )}
 
-      {filteredPokemonList.length === 0 && search !== "" && error === "" && (
-        <div className="flex flex-1 flex-col items-center justify-center gap-4">
-          <h2 className="text-center font-sans text-2xl font-semibold text-black">
-            No Pokémon found.
-          </h2>
-
-          <p className="text-center font-sans text-base font-normal text-black">
-            Try another search.
-          </p>
-        </div>
+      {/* Show the message for Pokémon not found */}
+      {filteredPokemonList.length === 0 && search !== "" && !error && (
+        <NotFound />
       )}
 
-      {error !== "" && (
-        <div className="flex flex-1 flex-col items-center justify-center gap-4">
-          <h2 className="text-center font-sans text-2xl font-semibold text-black">
-            Error loading Pokémon.
-          </h2>
+      {/* Show the message for Pokémon error in the API */}
+      {error && <Error />}
 
-          <p className="text-center font-sans text-base font-normal text-black">
-            Try again later.
-          </p>
-        </div>
-      )}
-
+      {/* Show the loader */}
       {loading && <Loader />}
 
+      {/* Show the load more button */}
       {filteredPokemonList.length !== 0 &&
         filteredPokemonList.length < 1025 &&
-        filteredPokemonList.length > 20 && (
+        filteredPokemonList.length > 19 && (
           <button
             type="button"
-            disabled={loading}
-            onClick={loadPokemonList}
+            disabled={loadingMore}
+            onClick={loadMorePokemon}
             className="bg-button-green hover:bg-button-green-hover disabled:hover:bg-button-green rounded-md px-4 py-2 font-sans text-base font-normal text-white transition-all duration-300 ease-in-out disabled:opacity-70"
           >
-            Load more Pokémon
+            {loadingMore ? "Loading..." : "Load more Pokémon"}
           </button>
         )}
     </>

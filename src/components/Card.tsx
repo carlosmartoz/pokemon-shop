@@ -37,7 +37,7 @@ export default function Card({
             />
           </figure>
 
-          <div className="flex flex-col gap-2">
+          <section className="flex flex-col gap-2">
             <span className="text-gray font-mono text-base font-medium">
               {number}
             </span>
@@ -67,7 +67,7 @@ export default function Card({
             >
               Add to cart
             </button>
-          </div>
+          </section>
         </section>
       </li>
     </>

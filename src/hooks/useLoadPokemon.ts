@@ -4,10 +4,6 @@ import { useState, useEffect } from "react";
 // Types
 import { PokemonWithPriceAndNumber } from "@/types/types";
 
-// Stores
-import { useErrorStore } from "@/stores/useErrorStore";
-import { useLoadingStore } from "@/stores/useLoadingStore";
-
 // Services
 import { fetchPokemonList } from "@/services/fetchPokemonList";
 
@@ -18,6 +14,9 @@ import { assingNewDataToPokemon } from "@/utils/assingNewDataToPokemon";
 export const useLoadPokemon = (): [
   PokemonWithPriceAndNumber[],
   () => Promise<void>,
+  boolean,
+  boolean,
+  boolean,
 ] => {
   // Use Effect
   useEffect(() => {
@@ -27,51 +26,96 @@ export const useLoadPokemon = (): [
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Error store
-  const { setError } = useErrorStore();
+  // Error
+  const [error, setError] = useState<boolean>(false);
+
+  // Loading
+  const [loading, setLoading] = useState<boolean>(true);
+
+  // Loading more
+  const [loadingMore, setLoadingMore] = useState<boolean>(false);
 
   // Offset
   const [offset, setOffset] = useState(0);
-
-  // Loading store
-  const { setLoading } = useLoadingStore();
 
   // Pokemon list
   const [pokemonList, setPokemonList] = useState<PokemonWithPriceAndNumber[]>(
     [],
   );
 
-  // Function to load pokémon list
+  // Function to load initial pokémon list
   const loadPokemonList = async () => {
     // Set loading
     setLoading(true);
 
-    // Try to fetch pokémon list
     try {
-      // Fetch pokémon list
-      const pokemonList = await fetchPokemonList(offset);
-
-      // Assing prices and currencies to the pokemon list
-      const pokemonListWithPriceAndCurrency =
-        assingNewDataToPokemon(pokemonList);
-
-      // Set pokémon list
-      setPokemonList((prev) => [...prev, ...pokemonListWithPriceAndCurrency]);
-
-      // Set offset
-      setOffset((prev) => prev + 20);
+      // Fetch and update pokémon list
+      await fetchAndUpdatePokemonList();
     } catch (error) {
-      // Set loading
-      setLoading(false);
-
       // Set Error
-      setError("Failed to fetch Pokémon list");
+      setError(true);
     } finally {
       // Set loading
       setLoading(false);
     }
   };
 
+  // Function to load more pokémon
+  const loadMorePokemon = async () => {
+    // Set loading more
+    setLoadingMore(true);
+
+    try {
+      // Fetch and update pokémon list
+      await fetchAndUpdatePokemonList();
+    } catch (error) {
+      // Set Error
+      setError(true);
+    } finally {
+      // Set loading more
+      setLoadingMore(false);
+    }
+  };
+
+  // Function to fetch and update pokémon list
+  const fetchAndUpdatePokemonList = async () => {
+    // Fetch pokémon list
+    const pokemonList = await fetchPokemonList(offset);
+
+    // Assing prices and currencies to the pokemon list
+    const pokemonWithPriceAndNumber = assingNewDataToPokemon(pokemonList);
+
+    // Get existing list from local storage
+    const existingList = localStorage.getItem("pokemonList");
+
+    // Parse existing list or initialize as empty array
+    const parsedList = existingList ? JSON.parse(existingList) : [];
+
+    // Combine existing list with new data, filtering out duplicates
+    const updatedList = [
+      ...parsedList,
+      ...pokemonWithPriceAndNumber.filter(
+        (newPokemon) =>
+          !parsedList.some(
+            (existingPokemon: PokemonWithPriceAndNumber) =>
+              existingPokemon.number === newPokemon.number,
+          ),
+      ),
+    ];
+
+    // Set local storage with updated list
+    localStorage.setItem("pokemonList", JSON.stringify(updatedList));
+
+    // Set pokémon list
+    setPokemonList((prev) => [
+      ...prev,
+      ...updatedList.slice(offset, offset + 20),
+    ]);
+
+    // Set offset
+    setOffset((prev) => prev + 20);
+  };
+
   // Return
-  return [pokemonList, loadPokemonList];
+  return [pokemonList, loadMorePokemon, error, loading, loadingMore];
 };
