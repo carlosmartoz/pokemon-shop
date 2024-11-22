@@ -17,6 +17,9 @@ export const fetchConvertCurrency = async (
     // Return
     return amount * fetchConvertCurrency.data.conversion_rate;
   } catch (error) {
+    // Error log
+    console.log(error);
+
     // Throw an error with a message if the request fails
     throw new Error("Failed to convert currency");
   }

@@ -66,6 +66,9 @@ export const useCart = (): [() => void, number, boolean, boolean] => {
               userCurrency,
             );
           } catch (error) {
+            // Error log
+            console.log(error);
+
             // Set Error
             setError(true);
           }

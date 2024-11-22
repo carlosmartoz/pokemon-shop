@@ -32,6 +32,9 @@ export const fetchPokemonList = async (
             image: detail.data.sprites.other["official-artwork"].front_default,
           };
         } catch (error) {
+          // Error log
+          console.log(error);
+
           // Return null if the request fails
           return null;
         }
@@ -43,6 +46,9 @@ export const fetchPokemonList = async (
       (pokemon): pokemon is Pokemon => pokemon !== null,
     );
   } catch (error) {
+    // Error log
+    console.log(error);
+
     // Throw an error with a message if the request fails
     throw new Error("Failed to fetch Pokémon list");
   }

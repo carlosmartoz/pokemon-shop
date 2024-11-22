@@ -50,6 +50,9 @@ export const useLoadPokemon = (): [
       // Fetch and update pokémon list
       await fetchAndUpdatePokemonList();
     } catch (error) {
+      // Error log
+      console.log(error);
+
       // Set Error
       setError(true);
     } finally {
@@ -67,6 +70,9 @@ export const useLoadPokemon = (): [
       // Fetch and update pokémon list
       await fetchAndUpdatePokemonList();
     } catch (error) {
+      // Error log
+      console.log(error);
+
       // Set Error
       setError(true);
     } finally {
