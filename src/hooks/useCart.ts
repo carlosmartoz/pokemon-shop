@@ -1,3 +1,6 @@
+// Shadcn
+import { useToast } from "@/hooks/use-toast";
+
 // React
 import { useEffect, useState } from "react";
 
@@ -16,6 +19,9 @@ import { fetchConvertCurrency } from "@/services/fetchConvertCurrency";
 
 // Hooks
 export const useCart = (): [() => void, number, boolean, boolean] => {
+  // Toast
+  const { toast } = useToast();
+
   // Wallet store
   const { pay } = useWalletStore();
 
@@ -110,6 +116,10 @@ export const useCart = (): [() => void, number, boolean, boolean] => {
 
     // Add to owned list
     cartList.forEach((item) => addPokemonOwned(item.id));
+
+    toast({
+      title: "Payment successful",
+    });
   }
 
   // Return

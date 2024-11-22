@@ -1,3 +1,6 @@
+// Shadcn
+import { useToast } from "@/hooks/use-toast";
+
 // React
 import { useEffect, useState } from "react";
 
@@ -5,12 +8,26 @@ import { useEffect, useState } from "react";
 import { useWalletStore } from "@/stores/useWalletStore";
 
 // Hooks
-export const useWallet = (): [boolean] => {
+export const useWallet = (): [boolean, () => void] => {
+  // Toast
+  const { toast } = useToast();
+
   // Wallet
   const { addBalance } = useWalletStore();
 
   // Loading
   const [loading, setLoading] = useState<boolean>(true);
+
+  // Function to add balance
+  function handleAddBalance() {
+    // Add balance
+    addBalance(1000);
+
+    // Toast
+    toast({
+      title: "Funds added",
+    });
+  }
 
   // Effect
   useEffect(() => {
@@ -34,5 +51,5 @@ export const useWallet = (): [boolean] => {
   }, [addBalance]);
 
   // Return
-  return [loading];
+  return [loading, handleAddBalance];
 };

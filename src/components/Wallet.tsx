@@ -18,18 +18,18 @@ import { addSymbolToPriceAndCurrency } from "@/utils/addSymbolToPriceAndCurrency
 
 // Component
 export default function Wallet() {
-  // Wallet
-  const [loading] = useWallet();
-
   // Wallet store
-  const { wallet, addBalance } = useWalletStore();
+  const { wallet } = useWalletStore();
+
+  // Wallet
+  const [loading, handleAddBalance] = useWallet();
 
   // Return
   return (
     <>
       <section className="flex flex-col gap-2 sm:flex-row sm:items-center">
         <button
-          onClick={() => addBalance(1000)}
+          onClick={() => handleAddBalance()}
           className="bg-blue hover:bg-blue-hover rounded px-3 py-1 font-sans text-base font-normal text-white transition-all duration-300 ease-in-out"
         >
           Add funds
