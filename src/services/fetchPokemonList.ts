@@ -11,15 +11,15 @@ export const fetchPokemonList = async (
 ): Promise<Pokemon[]> => {
   // Try to fetch the Pokemon list
   try {
-    // Get Pokemon list
+    // Get Pokémon list
     const pokemonList = await axios.get(
       `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`,
     );
 
-    // Get Pokemon detail
+    // Get Pokémon detail
     const pokemonDetail = await Promise.all(
       pokemonList.data.results.map(async (pokemon: { url: string }) => {
-        // Try to fetch the Pokemon detail
+        // Try to fetch the Pokémon detail
         try {
           // Detail
           const detail = await axios.get(pokemon.url);

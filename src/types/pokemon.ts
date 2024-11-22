@@ -1,10 +1,10 @@
-// Pokemon owned
+// Pokémon owned
 export interface PokemonOwned {
   pokemonOwnedList: number[];
   addPokemonOwned: (id: number) => void;
 }
 
-// Pokemon
+// Pokémon
 export interface Pokemon {
   id: number;
   name: string;
@@ -12,7 +12,7 @@ export interface Pokemon {
   types: { slot: number; type: { name: string } }[];
 }
 
-// Pokemon with new data
+// Pokémon with new data
 export interface PokemonWithNewData extends Pokemon {
   price: string;
   number: string;

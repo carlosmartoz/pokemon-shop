@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="flex flex-col items-center justify-center scroll-smooth bg-body"
+      className="bg-background flex flex-col items-center justify-center scroll-smooth"
     >
       <body className="bg-neutral flex w-full max-w-6xl flex-col items-center justify-center p-6 lg:p-0">
         {children}

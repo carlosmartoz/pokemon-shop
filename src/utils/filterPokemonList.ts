@@ -1,7 +1,7 @@
 // Types
 import { type PokemonWithNewData } from "@/types/pokemon";
 
-// Function to filter the pokemon list
+// Function to filter the Pokémon list
 export function filterPokemonList(
   pokemonList: PokemonWithNewData[],
   search: string,

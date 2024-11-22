@@ -8,7 +8,7 @@ export default function Header() {
   // Return
   return (
     <>
-      <header className="flex w-full flex-col items-center justify-between gap-4 sm:flex-row">
+      <header className="flex w-full flex-col items-center justify-between gap-4 md:flex-row">
         <Search />
 
         <ul className="flex items-center gap-4">

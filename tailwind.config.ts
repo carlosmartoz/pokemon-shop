@@ -11,7 +11,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        body: "#313131",
+        background: "#313131",
         gray: "#919191",
         neutral: "#f5f5f5",
         blue: "#30a7d7",

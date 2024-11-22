@@ -27,7 +27,7 @@ export default function Wallet() {
   // Return
   return (
     <>
-      <section className="flex items-center gap-2">
+      <section className="flex flex-col gap-2 sm:flex-row sm:items-center">
         <button
           onClick={() => addBalance(1000)}
           className="bg-blue hover:bg-blue-hover rounded px-3 py-1 font-sans text-base font-normal text-white transition-all duration-300 ease-in-out"

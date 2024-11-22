@@ -1,4 +1,4 @@
-// Function to get the color class based on the type of the pokemon
+// Function to get the color class based on the type of the Pokémon
 export function getClassColorType(type: string): string {
   // Switch
   switch (type) {

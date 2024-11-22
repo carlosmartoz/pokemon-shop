@@ -25,7 +25,7 @@ export const useCart = (): [() => void, number, boolean, boolean] => {
   // Total
   const [total, setTotal] = useState<number>(0);
 
-  // Pokemon owned store
+  // Pokémon owned store
   const { addPokemonOwned } = usePokemonOwnedStore();
 
   // Error

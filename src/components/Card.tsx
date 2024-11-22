@@ -28,7 +28,7 @@ export default function Card({
   // Cart store
   const { addToCart, cartList } = useCartStore();
 
-  // Pokemon owned store
+  // Pokémon owned store
   const { pokemonOwnedList } = usePokemonOwnedStore();
 
   // Return

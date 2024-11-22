@@ -11,7 +11,7 @@ export default function NotFound() {
           No Pokémon found.
         </h2>
 
-        <Image src={"/images.png"} width={256} height={256} alt="Error" />
+        <Image src={"/failImage.png"} width={256} height={256} alt="Error" />
 
         <p className="text-center font-sans text-base font-normal text-black">
           Try another search.

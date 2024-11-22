@@ -38,7 +38,7 @@ export const useLoadPokemon = (): [
   // Offset
   const [offset, setOffset] = useState(0);
 
-  // Pokemon list
+  // Pokémon list
   const [pokemonList, setPokemonList] = useState<PokemonWithNewData[]>([]);
 
   // Function to load initial pokémon list
@@ -86,7 +86,7 @@ export const useLoadPokemon = (): [
     // Fetch pokémon list
     const pokemonList = await fetchPokemonList(offset);
 
-    // Assing new data to the pokemon list
+    // Assing new data to the Pokémon list
     const PokemonWithNewData = assingNewDataToPokemonList(pokemonList);
 
     // Get existing list from local storage
@@ -108,7 +108,7 @@ export const useLoadPokemon = (): [
     ];
 
     // Set local storage with updated list
-    localStorage.setItem("pokemonList", JSON.stringify(updatedList));
+    localStorage.setItem("pokemon-list-storage", JSON.stringify(updatedList));
 
     // Set pokémon list
     setPokemonList((prev) => [

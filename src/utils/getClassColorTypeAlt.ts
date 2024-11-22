@@ -1,4 +1,4 @@
-// Function to get the color class alt based on the type of the pokemon
+// Function to get the color class alt based on the type of the Pokémon
 export function getClassColorTypeAlt(type: string): string {
   // Switch
   switch (type) {

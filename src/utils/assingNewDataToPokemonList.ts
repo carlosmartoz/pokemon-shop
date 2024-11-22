@@ -11,7 +11,7 @@ export function assingNewDataToPokemonList(
 ): PokemonWithNewData[] {
   // Return
   return pokemonList.map((pokemon) => ({
-    // Add pokemon information
+    // Add Pokémon information
     ...pokemon,
 
     // Add number
