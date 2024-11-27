@@ -3,7 +3,7 @@
 <div>
    <h3>Pokémon Shop</h3>
 
-   <p>A web application designed to fetch data from the Pokémon TCG API, implement pagination for browsing cards, and ensure data persistence for a seamless user experience.</p>
+   <p>A web application designed to fetch data from the Pokémon API, implement pagination for browsing Pokémon, and ensure data persistence for a seamless user experience.</p>
 </div>
 
 ## Installation
